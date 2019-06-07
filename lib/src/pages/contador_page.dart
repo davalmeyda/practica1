@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ContadorPage extends StatefulWidget {
@@ -26,15 +27,53 @@ class _ContadorPageState extends State<ContadorPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _contador++;
-          });
-        },
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: _crearBotones(),
     );
     return scaffold;
+  }
+
+  Widget _crearBotones() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(
+          width: 30.0,
+        ),
+        FloatingActionButton(
+          onPressed: _reset,
+          child: Icon(Icons.exposure_zero),
+        ),
+        Expanded(child: SizedBox()),
+        FloatingActionButton(
+          onPressed: _sustraer,
+          child: Icon(Icons.remove),
+        ),
+        SizedBox(
+          width: 5.0,
+        ),
+        FloatingActionButton(
+          onPressed: _agregar,
+          child: Icon(Icons.add),
+        ),
+      ],
+    );
+  }
+
+  void _agregar() {
+    setState(() {
+      _contador++;
+    });
+  }
+
+  void _sustraer() {
+    setState(() {
+      _contador--;
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _contador = 0;
+    });
   }
 }
